@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+<head>
+<script type="text/javascript">
+function foo(response) {
+  var meta = response.meta;
+  var data = response.data;
+  console.log(meta);
+  console.log(data);
+}
+
+var script = document.createElement('script');
+script.src = 'https://api.github.com?callback=foo';
+
+document.getElementsByTagName('head')[0].appendChild(script);
+
+</head>
+{% block body %}
+
+<h1>Navigator</h1>
+{your}
+
+<h1>{search_term}</h1>
+<h2>1. {respository_name}</h2>
+<h3> Created {created_at}</h3>
+<a href="{owner_url}"><img src="{avatar_url}" alt="avatar" height="42" width="42"/></a>
+{owner_login}
+<h3>LastCommit</h3>
+{sha} {commit_message}  {commit_author_name}
+<hr/>
+<h2>2. {respository_name}</h2>
+<h3> Created {created_at}</h3>
+<a href="{owner_url}"><img src="{avatar_url}" alt="avatar" height="42" width="42"/></a>
+{owner_login}
+<h3>LastCommit</h3>
+{sha} {commit_message}  {commit_author_name}
+<hr/>
+<moj></moj>
+<form action = "http://localhost:5000/navigator" method = "post">
+         <p>Enter search:</p>
+         <p><input type = "text" name = "sm" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+      </form>
+
+ <form action = "http://localhost:5000/login" method = "post">
+         <p>Enter Name:</p>
+         <p><input type = "text" name = "nm" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+      </form>
+<p>
+  <input type="text" size="5" name="a"> +
+  <input type="text" size="5" name="b"> =
+  <span id="result">?</span>
+<p><a href=# id="calculate">calculate server side</a>
+<a href="https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc">search</a>
+{% endblock %}
